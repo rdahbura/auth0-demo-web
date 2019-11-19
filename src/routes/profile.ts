@@ -7,8 +7,9 @@ const router = Router();
  */
 router.get('/profile', (req, res) => {
   res.render('profile', {
-    profile: JSON.stringify(req.user, null, 2),
+    name: 'profile',
     title: 'Profile page',
+    profile: JSON.stringify(req.user, null, 2),
   });
 });
 

@@ -7,11 +7,11 @@ import { isAuthenticated } from '../config/passport';
 
 const router = Router();
 
-/**
- * Root.
- */
 router.get('/', (req, res) => {
-  res.render('index', { title: 'Auth0 Webapp sample Nodejs' });
+  res.render('index', {
+    name: 'index',
+    title: 'Auth0 Webapp sample Nodejs',
+  });
 });
 
 router.use('/', authRouter);

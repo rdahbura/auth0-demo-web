@@ -1,0 +1,25 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
+
+    link(rel='stylesheet', href='//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+
+    link(rel='shortcut icon', href='//cdn2.auth0.com/styleguide/latest/lib/logos/img/favicon.png')
+
+    title= title
+
+  body
+    include ../shared/nav
+
+    main.container
+      .jumbotron
+        h1 Navbar example
+        p.lead This example is a quick exercise to illustrate how the top-aligned navbar works. As you scroll, this navbar remains in its original position and moves with the rest of the page.
+      block content
+
+  script(src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.js")
+  script(src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.js")
+  script(src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js")

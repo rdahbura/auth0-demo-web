@@ -7,16 +7,6 @@ import { AUTH0_CLIENT_ID, AUTH0_DOMAIN } from '../utils/constants';
 
 const router = Router();
 
-router.get(
-  '/login',
-  authenticate('auth0', {
-    scope: 'openid profile email',
-  }),
-  (req, res) => {
-    res.redirect('/');
-  }
-);
-
 router.get('/callback', (req, res, next) => {
   authenticate('auth0', (err, user) => {
     if (err) {
@@ -39,11 +29,19 @@ router.get('/callback', (req, res, next) => {
   })(req, res, next);
 });
 
+router.get(
+  '/login',
+  authenticate('auth0', {
+    scope: 'openid profile email',
+  }),
+  (req, res) => {
+    res.redirect('/');
+  }
+);
+
 router.get('/logout', (req, res) => {
   const returnURL = new URL(`${req.protocol}://${req.hostname}`);
-
-  const port = req.connection.localPort;
-  returnURL.port = port.toString();
+  returnURL.port = req.connection.localPort.toString();
 
   const logoutURL = new URL(`https://${AUTH0_DOMAIN}/logout`);
   logoutURL.search = stringify({
