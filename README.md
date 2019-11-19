@@ -1,1 +1,1 @@
-# Auth0 Demo API
+# Auth0 Demo Web
