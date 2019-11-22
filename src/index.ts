@@ -1,7 +1,6 @@
 import 'dotenv/config';
 
 import express from 'express';
-import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import flash from 'connect-flash';
 import helmet from 'helmet';
@@ -28,7 +27,6 @@ app.use(morgan('dev'));
 
 // Configure middleware
 app.use(helmet());
-app.use(compression());
 app.use(cookieParser());
 app.use(
   session({
