@@ -29,6 +29,15 @@ router.get('/callback', (req, res, next) => {
   })(req, res, next);
 });
 
+router.get('/callback-popup', (req, res) => {
+  res.render('callback-popup', {
+    auth0Domain: AUTH0_DOMAIN,
+    auth0ClientId: AUTH0_CLIENT_ID,
+    name: 'callback-popup',
+    title: 'Auth0 Web App',
+  });
+});
+
 router.get(
   '/login',
   authenticate('auth0', {

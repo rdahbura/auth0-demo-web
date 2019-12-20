@@ -8,7 +8,7 @@ const router = Router();
 router.get('/profile', (req, res) => {
   res.render('profile', {
     name: 'profile',
-    title: 'Profile page',
+    title: 'Auth0 Web App',
     profile: JSON.stringify(req.user, null, 2),
   });
 });

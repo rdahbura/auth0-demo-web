@@ -12,7 +12,27 @@ html(lang="en")
     title= title
 
   body
-    include ../shared/nav
+    block nav
+      nav.navbar.navbar-expand-md.navbar-dark.bg-dark.mb-4
+        span.navbar-brand.h1.mb-0 Navbar
+        button.navbar-toggler(type="button" data-toggle="collapse" data-target="#navbarNav")
+          span.navbar-toggler-icon
+        .collapse.navbar-collapse(id="navbarNav")
+          ul.navbar-nav.mr-auto
+            li.nav-item(class=(isActive("index")))
+              a.nav-link(href="/") Home
+            if locals.user
+              li.nav-item(class=(isActive("profile")))
+                a.nav-link(href="/profile") Profile
+          ul.navbar-nav
+            if locals.user
+              li.nav-item
+                a.nav-link(href="/logout") Log Out
+            else
+              li.nav-item
+                a.nav-link(href="/login") Log In
+              li.nav-item
+                a.nav-link(id="loginPopup" href="#") Log In (Popup)
 
     main.container
       .jumbotron
@@ -20,6 +40,30 @@ html(lang="en")
         p.lead This example is a quick exercise to illustrate how the top-aligned navbar works. As you scroll, this navbar remains in its original position and moves with the rest of the page.
       block content
 
-  script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js")
-  script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js")
-  script(src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js")
+  block scripts
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js")
+    script(src="https://cdn.auth0.com/js/auth0/9.12.1/auth0.min.js")
+    script(type='text/javascript').
+      var webAuth = new auth0.WebAuth({
+        domain:   '#{auth0Domain}',
+        clientID: '#{auth0ClientId}'
+      });
+      $("#loginPopup").click(function() {
+        webAuth.popup.authorize({
+          //connection: 'google-oauth2',
+          redirectUri: 'http://localhost:3080/callback-popup',
+          responseType: 'id_token token',
+          scope: 'openid profile email'
+        }, function(err, authResult) {
+          if (err) {
+            console.log(err);
+          }
+          if (authResult) {
+            console.log(authResult);
+          }
+        });
+      });
+
+- function isActive(page) { return name === page ? "active" : undefined; }
