@@ -47,13 +47,13 @@ html(lang="en")
     script(src="https://cdn.auth0.com/js/auth0/9.12.1/auth0.min.js")
     script(type='text/javascript').
       var webAuth = new auth0.WebAuth({
-        domain:   '#{auth0Domain}',
+        domain:'#{auth0Domain}',
         clientID: '#{auth0ClientId}'
       });
       $("#loginPopup").click(function() {
         webAuth.popup.authorize({
           //connection: 'google-oauth2',
-          redirectUri: 'http://localhost:3080/callback-popup',
+          redirectUri: 'http://localhost:4000/callback-popup',
           responseType: 'id_token token',
           scope: 'openid profile email'
         }, function(err, authResult) {
