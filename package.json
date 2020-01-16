@@ -36,7 +36,7 @@
     "@types/helmet": "^0.0.45",
     "@types/mongodb": "^3.3.14",
     "@types/morgan": "^1.7.37",
-    "@types/node": "^13.1.6",
+    "@types/node": "^13.1.7",
     "@types/passport": "^1.0.2",
     "@types/passport-auth0": "^1.0.2",
     "@types/request": "^2.48.4",
