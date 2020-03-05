@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
     auth0Domain: AUTH0_DOMAIN,
     auth0ClientId: AUTH0_CLIENT_ID,
     name: 'index',
-    title: 'Auth0 Web App',
+    title: 'Auth0 Demo Web App',
   });
 });
 
