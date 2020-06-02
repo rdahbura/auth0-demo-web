@@ -24,6 +24,8 @@ html(lang="en")
             if locals.user
               li.nav-item(class=(isActive("profile")))
                 a.nav-link(href="/profile") Profile
+              li.nav-item(class=(isActive("secret")))
+                a.nav-link(href="/secret") Secret
           ul.navbar-nav
             if locals.user
               li.nav-item
@@ -55,7 +57,7 @@ html(lang="en")
           //connection: 'google-oauth2',
           redirectUri: 'http://localhost:4000/callback-popup',
           responseType: 'id_token token',
-          scope: 'openid profile email'
+          scope: '#{auth0Scope}'
         }, function(err, authResult) {
           if (err) {
             console.log(err);

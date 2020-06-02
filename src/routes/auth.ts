@@ -3,7 +3,8 @@ import { URL } from 'url';
 import { authenticate } from 'passport';
 import { stringify } from 'querystring';
 
-import { AUTH0_CLIENT_ID, AUTH0_DOMAIN } from '../utils/constants';
+import { AUTH0_CLIENT_ID, AUTH0_DOMAIN, AUTH0_SCOPE } from '../utils/constants';
+import { AuthenticateOptions } from 'passport-auth0';
 
 const router = Router();
 
@@ -17,14 +18,14 @@ router.get('/callback', (req, res, next) => {
       res.redirect('/login');
       return;
     }
-    req.logIn(user, function(err) {
+    req.logIn(user, function (err) {
       if (err) {
         next(err);
         return;
       }
       const returnTo = req.session?.returnTo;
       delete req.session?.returnTo;
-      res.redirect(returnTo || '/profile');
+      res.redirect(returnTo || '/');
     });
   })(req, res, next);
 });
@@ -40,9 +41,31 @@ router.get('/callback-popup', (req, res) => {
 
 router.get(
   '/login',
-  authenticate('auth0', {
-    scope: 'openid profile email',
-  }),
+  function (req, res, next) {
+    authenticate('auth0', {
+      scope: AUTH0_SCOPE,
+    })(req, res, next);
+  },
+  (req, res) => {
+    res.redirect('/');
+  }
+);
+
+interface AuthenticateOptionsExt extends AuthenticateOptions {
+  acr_values?: string;
+}
+
+const ACR_VALUES =
+  'http://schemas.openid.net/pape/policies/2007/06/multi-factor';
+
+router.get(
+  '/login-mfa',
+  function (req, res, next) {
+    authenticate('auth0', {
+      acr_values: ACR_VALUES,
+      scope: AUTH0_SCOPE,
+    } as AuthenticateOptionsExt)(req, res, next);
+  },
   (req, res) => {
     res.redirect('/');
   }

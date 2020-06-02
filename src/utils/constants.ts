@@ -3,6 +3,7 @@ const AUTH0_CALLBACK_POPUP_URL = process.env.AUTH0_CALLBACK_POPUP_URL || '';
 const AUTH0_CLIENT_ID = process.env.AUTH0_CLIENT_ID || '';
 const AUTH0_CLIENT_SECRET = process.env.AUTH0_CLIENT_SECRET || '';
 const AUTH0_DOMAIN = process.env.AUTH0_DOMAIN || '';
+const AUTH0_SCOPE = 'openid profile email';
 const COOKIE_SECRET = process.env.COOKIE_SECRET || '';
 const NODE_ENV = process.env.NODE_ENV || '';
 const PORT = process.env.PORT || 5000;
@@ -17,6 +18,7 @@ export {
   AUTH0_CLIENT_ID,
   AUTH0_CLIENT_SECRET,
   AUTH0_DOMAIN,
+  AUTH0_SCOPE,
   COOKIE_SECRET,
   NODE_ENV,
   PORT,

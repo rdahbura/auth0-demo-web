@@ -33,7 +33,7 @@ app.use(
     cookie: {
       secure: isProduction(),
     },
-    resave: false,
+    resave: true,
     saveUninitialized: true,
     secret: COOKIE_SECRET,
   })
@@ -41,6 +41,7 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(express.static(path.join(__dirname, '../public')));
 app.use(flash());
 app.use((req, res, next) => {
   res.locals.user = req.user;
@@ -48,18 +49,17 @@ app.use((req, res, next) => {
 });
 
 // Handle auth failure error messages
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   if (req.query?.error) {
-    req.flash('error', req.query.error);
+    req.flash('error', req.query.error.toString());
   }
   if (req.query?.error_description) {
-    req.flash('error_description', req.query.error_description);
+    req.flash('error_description', req.query.error_description.toString());
   }
   next();
 });
 
 // Configure static assets
-app.use(express.static(path.join(__dirname, '../public')));
 
 // Configure routes
 app.use('/', routes);

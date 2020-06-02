@@ -1,4 +1,10 @@
 import { STATUS_CODES } from 'http';
+import passportAuth0 from 'passport-auth0';
+
+export interface ExtraVerificationParamsWithToken
+  extends passportAuth0.ExtraVerificationParams {
+  id_token?: string;
+}
 
 export class HttpError extends Error {
   status: number;
