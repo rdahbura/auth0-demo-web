@@ -1,3 +1,6 @@
+const ACR_VALUES =
+  'http://schemas.openid.net/pape/policies/2007/06/multi-factor';
+
 const AUTH0_CALLBACK_URL = process.env.AUTH0_CALLBACK_URL || '';
 const AUTH0_CALLBACK_POPUP_URL = process.env.AUTH0_CALLBACK_POPUP_URL || '';
 const AUTH0_CLIENT_ID = process.env.AUTH0_CLIENT_ID || '';
@@ -13,6 +16,7 @@ const isProduction = (): boolean => {
 };
 
 export {
+  ACR_VALUES,
   AUTH0_CALLBACK_URL,
   AUTH0_CALLBACK_POPUP_URL,
   AUTH0_CLIENT_ID,

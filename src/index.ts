@@ -26,7 +26,11 @@ app.set('view engine', 'pug');
 app.use(morgan('dev'));
 
 // Configure middleware
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+  })
+);
 app.use(cookieParser());
 app.use(
   session({

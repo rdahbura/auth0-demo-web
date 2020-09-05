@@ -1,0 +1,27 @@
+extends ../layouts/default
+
+block content
+  h4 Embedded login page
+  div(class="row")
+    div(class="col-md-4")
+      form
+        div(class="form-group")
+          label Email
+          input(id="email",class="form-control",type="email")
+        div(class="form-group")
+          label Password
+          input(id="password",class="form-control",type="password")
+        button(id="loginEmbedded",class="btn btn-primary",type="button") Log in
+
+block scripts
+  script(type='text/javascript').
+    $("#loginEmbedded").click(function() {
+      webAuth.login({
+        email: $('#email').val(),
+        password: $('#password').val(),
+        realm: "Username-Password-Authentication",
+        redirectUri: 'http://localhost:4000/callback-embedded',
+      }, function(resp){
+        console.log(resp);
+      });
+    });

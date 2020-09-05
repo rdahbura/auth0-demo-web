@@ -3,8 +3,17 @@ import { URL } from 'url';
 import { authenticate } from 'passport';
 import { stringify } from 'querystring';
 
-import { AUTH0_CLIENT_ID, AUTH0_DOMAIN, AUTH0_SCOPE } from '../utils/constants';
+import {
+  ACR_VALUES,
+  AUTH0_CLIENT_ID,
+  AUTH0_DOMAIN,
+  AUTH0_SCOPE,
+} from '../utils/constants';
 import { AuthenticateOptions } from 'passport-auth0';
+
+interface AuthenticateOptionsExt extends AuthenticateOptions {
+  acr_values?: string;
+}
 
 const router = Router();
 
@@ -30,18 +39,9 @@ router.get('/callback', (req, res, next) => {
   })(req, res, next);
 });
 
-router.get('/callback-popup', (req, res) => {
-  res.render('callback-popup', {
-    auth0Domain: AUTH0_DOMAIN,
-    auth0ClientId: AUTH0_CLIENT_ID,
-    name: 'callback-popup',
-    title: 'Auth0 Demo Web App',
-  });
-});
-
 router.get(
   '/login',
-  function (req, res, next) {
+  (req, res, next) => {
     authenticate('auth0', {
       scope: AUTH0_SCOPE,
     })(req, res, next);
@@ -51,16 +51,9 @@ router.get(
   }
 );
 
-interface AuthenticateOptionsExt extends AuthenticateOptions {
-  acr_values?: string;
-}
-
-const ACR_VALUES =
-  'http://schemas.openid.net/pape/policies/2007/06/multi-factor';
-
 router.get(
   '/login-mfa',
-  function (req, res, next) {
+  (req, res, next) => {
     authenticate('auth0', {
       acr_values: ACR_VALUES,
       scope: AUTH0_SCOPE,

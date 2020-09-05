@@ -18,6 +18,34 @@ router.get('/', (req, res) => {
   });
 });
 
+router.get('/callback-embedded', (req, res) => {
+  res.render('callback-popup', {
+    auth0Domain: AUTH0_DOMAIN,
+    auth0ClientId: AUTH0_CLIENT_ID,
+    name: 'callback-popup',
+    title: 'Auth0 Demo Web App',
+  });
+});
+
+router.get('/callback-popup', (req, res) => {
+  res.render('callback-popup', {
+    auth0Domain: AUTH0_DOMAIN,
+    auth0ClientId: AUTH0_CLIENT_ID,
+    name: 'callback-popup',
+    title: 'Auth0 Demo Web App',
+  });
+});
+
+router.get('/embedded', (req, res) => {
+  res.render('embedded', {
+    auth0Domain: AUTH0_DOMAIN,
+    auth0ClientId: AUTH0_CLIENT_ID,
+    auth0Scope: AUTH0_SCOPE,
+    name: 'index',
+    title: 'Auth0 Demo Web App',
+  });
+});
+
 router.get('/error', (req, res) => {
   const status = req.query['status'] || '';
   const stack = req.query['stack'] || '';

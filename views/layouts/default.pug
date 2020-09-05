@@ -34,38 +34,37 @@ html(lang="en")
               li.nav-item
                 a.nav-link(href="/login") Log In
               li.nav-item
+                a.nav-link(href="/embedded") Log In (Embedded)
+              li.nav-item
                 a.nav-link(id="loginPopup" href="#") Log In (Popup)
 
     main.container
-      .jumbotron
-        h1 Navbar example
-        p.lead This example is a quick exercise to illustrate how the top-aligned navbar works. As you scroll, this navbar remains in its original position and moves with the rest of the page.
       block content
 
-  block scripts
-    script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js")
-    script(src="https://cdn.auth0.com/js/auth0/9.12.1/auth0.min.js")
+    script(src="https://cdn.auth0.com/js/auth0/9.13.4/auth0.min.js")
     script(type='text/javascript').
       var webAuth = new auth0.WebAuth({
-        domain:'#{auth0Domain}',
-        clientID: '#{auth0ClientId}'
+        domain: '#{auth0Domain}',
+        clientID: '#{auth0ClientId}',
+        responseType: 'code',
+        scope:"openid profile email"
       });
       $("#loginPopup").click(function() {
         webAuth.popup.authorize({
-          //connection: 'google-oauth2',
           redirectUri: 'http://localhost:4000/callback-popup',
-          responseType: 'id_token token',
-          scope: '#{auth0Scope}'
-        }, function(err, authResult) {
+        }, function(err, resp) {
           if (err) {
             console.log(err);
           }
-          if (authResult) {
-            console.log(authResult);
+          if (resp) {
+            console.log(resp);
           }
         });
       });
+
+  block scripts
 
 - function isActive(page) { return name === page ? "active" : undefined; }
