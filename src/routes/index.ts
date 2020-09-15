@@ -46,6 +46,16 @@ router.get('/embedded', (req, res) => {
   });
 });
 
+router.get('/embedded-lock', (req, res) => {
+  res.render('embedded-lock', {
+    auth0Domain: AUTH0_DOMAIN,
+    auth0ClientId: AUTH0_CLIENT_ID,
+    auth0Scope: AUTH0_SCOPE,
+    name: 'index',
+    title: 'Auth0 Demo Web App',
+  });
+});
+
 router.get('/error', (req, res) => {
   const status = req.query['status'] || '';
   const stack = req.query['stack'] || '';
