@@ -14,7 +14,7 @@ block content
         button(id="loginEmbedded",class="btn btn-primary",type="button") Log in
 
 block scripts
-  script(src="https://cdn.auth0.com/js/lock/11.26.3/lock.min.js",type='text/javascript')
+  script(src="https://cdn.auth0.com/js/lock/11.28.0/lock.min.js",type='text/javascript')
   script(type='text/javascript').
     var lock = new Auth0Lock('#{auth0ClientId}', '#{auth0Domain}', {
       auth: {
