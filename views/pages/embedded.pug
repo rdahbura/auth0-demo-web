@@ -19,7 +19,7 @@ block scripts
       webAuth.login({
         email: $('#email').val(),
         password: $('#password').val(),
-        realm: "Username-Password-Authentication",
+        realm: "username-password-authentication",
         redirectUri: 'http://localhost:4000/callback-embedded',
       }, function(resp){
         console.log(resp);
